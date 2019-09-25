@@ -1,0 +1,116 @@
+{{template "adminHeader" .}}
+
+<!--start: Form-->
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Product</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+<div class="box-content">
+    <form class="form-horizontal" method="post" action="/update-product" enctype='multipart/form-data'>
+        <fieldset>
+            <input type="hidden"  id="pro_name" name='id' required='' value='{{.Product.ID}}'>
+            <div class="control-group">
+                <label class="control-label" for="pro_name">Product Name</label>
+                <div class="controls">
+                    <input type="text"  id="pro_name" name='name' required='' value='{{.Product.Name}}'>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="cat_name">Category (active)</label>
+                <div class='controls'>
+                    <select id='cat_name' required='' name='category_id'>
+                        <option value={{.Product.Category.ID}}>{{.Product.Category.Name}}</option>
+                        {{range .Categories}}
+                        <option value="{{.ID}}">{{.Name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+
+            <div class='control-group'>
+                <label class="control-label" for="brand_name">Brand (active)</label>
+                <div class='controls'>
+                    <select id='brand_name' required='' name='brand_id'>
+                        <option value={{.Product.Brand.ID}}>{{.Product.Brand.Name}}</option>
+                        {{range .Brands}}
+                            <option value="{{.ID}}">{{.Name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="pro_des">Product Description</label>
+                <div class="controls">
+                    <textarea id="pro_des" rows="3" name='description'>{{.Product.Description.String}}</textarea>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="pro_img">Product Image</label>
+                <div class="controls">
+                    <input type="file"  id="pro_img" name='img'>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="pro_price">Product Price</label>
+                <div class="controls">
+                    <input type="text"  id="pro_price" name='price' required='' value='{{.Product.Price}}'>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="pro_size">Product Size</label>
+                <div class="controls">
+                    <input type="text"  id="pro_size" name='size' value='{{.Product.Size.String}}'>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="pro_color">Product Color</label>
+                <div class="controls">
+                    <input type="text"  id="pro_color" name='color' value='{{.Product.Color.String}}'>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="pro_serial">Product Serial</label>
+                <div class="controls">
+                    {{/*<input type="number"  id="pro_serial" name='product_sl'>*/}}
+                        <select type="number" id='pro_serial' required='' name='product_sl'>
+                       <option value="" >--select--</option>
+
+                        {{ range $key := .Product_positions }}
+
+
+                                <option value="{{$key}}" {{ if eq $key $.Product.ProductSL }} selected {{ end }} >{{$key}}</option>
+
+
+                        {{end}}
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+    </div><!--/span-->
+
+</div><!--/row-->
+<!--end: Form-->
+
+{{template "adminFooter" .}}

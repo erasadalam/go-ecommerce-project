@@ -1,0 +1,177 @@
+{{template "adminHeader" .}}
+<!--start: Table-->
+<div class="row-fluid sortable">
+    <div class="box span12">
+    <div class="box-header" data-original-title>
+        <h2><i class="halflings-icon user"></i><span class="break"></span>Customer Details</h2>
+        <div class="box-icon">
+            <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+            <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+            <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+        </div>
+    </div>
+    <div class="box-content">
+        <div class="" >
+            {{if (ne .Msg.Success "")}}
+                <br><br><span class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+            {{else if (ne .Msg.Fail "")}}
+                <br><br><span class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+            {{end}}
+        </div>
+        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+            <thead style='background-color:lightskyblue'>
+        <tr>
+            <th>Customer Name</th>
+            <th>Phone No</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{.Order.User.FullName}}</td>
+            <td>{{.Order.User.Phone}}</td>
+            <td>{{.Order.User.Email}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+    </div><!--/span-->
+</div><!--/row-->
+<!--end: Table-->
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Billing Details</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <div class="" >
+                {{if (ne .Msg.Success "")}}
+                    <br><br><span class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+                {{else if (ne .Msg.Fail "")}}
+                    <br><br><span class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+                {{end}}
+            </div>
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead style='background-color:lightskyblue'>
+            <tr>
+                <th>Bill To</th>
+                <th>Address</th>
+                <th>Phone No</th>
+                <th>Email</th>
+                <th>Payment Method</th>
+                <th>Payment Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{.Order.Bill.FullName}}</td>
+                <td>{{.Order.Bill.Address}}</td>
+                <td>{{.Order.Bill.Phone}}</td>
+                <td>{{.Order.Bill.Email.String}}</td>
+                <td>{{.Order.PayMethod.Method}}</td>
+                <td class="center">
+                    {{if (eq .Order.Bill.Status 1)}}
+
+                    <span class="label label-success">Done</span>
+
+                    {{else}}
+
+                    <span class="label">Pending</span>
+
+                    {{end}}
+                </td>
+                <td class="center">
+                    {{if (eq .Order.Bill.Status 1)}}
+                    <a class="btn" href="/make-payment-pending/{{.Order.Bill.ID}}">
+                        <span class="halflings-icon white thumbs-down"></span>
+                    </a>
+
+                    {{else}}
+                        <a class="btn" href="/make-payment-done/{{.Order.Bill.ID}}">
+                        <span class="halflings-icon white thumbs-up"></span>
+                    </a>
+                    {{end}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+
+</div><!--/span-->
+</div><!--/row-->
+<!--end: Table-->
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Order Details</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <div class="" >
+                {{if (ne .Msg.Success "")}}
+                    <br><br><span class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+                {{else if (ne .Msg.Fail "")}}
+                    <br><br><span class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+                {{end}}
+            </div>
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead style='background-color:lightskyblue'>
+            <tr>
+                <th>Product Id</th>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Tax</th>
+                <th>Total With Tax</th>
+            </tr>
+            </thead>
+            <tbody>
+           {{range .Order.OrderDetails}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td class="center"><img src="/assets/{{.Product.ImgUrl.String}}" style="height:60px;width:60px">
+                <td>{{.Product.Name}}</td>
+                <td>{{.Product.Price}}</td>
+                <td>{{.Quantity}}</td>
+                <td>{{.Total}}</td>
+                <td>{{.TotalTax}}</td>
+                <td>{{.TotalWithTax}}</td>
+            </tr>
+            {{end}}
+            </tbody>
+            <tfoot><tr>
+                <td><b>Grand Total (With Tax)</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b> = {{.Order.Total}}</b></td>
+            </tr>
+            </tfoot>
+        </table>
+        <br><br>
+    </div>
+    </div><!--/span-->
+</div><!--/row-->
+<!--end: Table-->
+
+
+{{template "adminFooter" .}}

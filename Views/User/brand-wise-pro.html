@@ -1,0 +1,62 @@
+{{template "userHeader" .}}
+
+<div class='container'>
+    <div class='col-sm-12'>
+        <div class="features_items"><!--features_items-->
+            <h2 class="title text-center">{{.Brand.Name}} Items</h2>
+            {{range .Brand.Products}}
+                {{if (eq .Status 1)}}
+            <div class="col-sm-4">
+                <div class="product-image-wrapper" style="background-color: #5bc0de">
+
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <a href="/product-details/{{.ID}}"><img src="/assets{{.ImgUrl.String}}" style='height:150px;width:150px' alt="" /></a>
+                            <h2>{{.Price}} Tk</h2>
+                            <p>{{.Name}}</p>
+                            <a href="/product-details/{{.ID}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                    </div>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified" style="background-color: #4cae4c">
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+                {{end}}
+            {{end}}
+        </div><!--features_items-->
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+    </div>
+</div>
+
+{{template "userFooter" .}}

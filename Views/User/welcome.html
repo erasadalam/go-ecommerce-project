@@ -1,0 +1,165 @@
+{{template "userHeader" .}}
+{{if (ne .Msg.Success "")}}
+    <br><br><span class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+{{else if (ne .Msg.Fail "")}}
+    <br><br><span class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+{{end}}
+<section id="slider"><!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#slider-carousel" data-slide-to="1"></li>
+                        <li data-target="#slider-carousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-sm-6">
+                                <h1><span>E</span>-SHOPPER</h1>
+                                <h2>Free E-Commerce Template</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">Get it now</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="/assets/Public/User/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+                                <img src="/assets/Public/User/images/home/pricing.png"  class="pricing" alt="" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-sm-6">
+                                <h1><span>E</span>-SHOPPER</h1>
+                                <h2>100% Responsive Design</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">Get it now</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="/assets/Public/User/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+                                <img src="/assets/Public/User/images/home/pricing.png"  class="pricing" alt="" />
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="col-sm-6">
+                                <h1><span>E</span>-SHOPPER</h1>
+                                <h2>Free Ecommerce Template</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">Get it now</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="/assets/Public/User/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                                <img src="/assets/Public/User/images/home/pricing.png" class="pricing" alt="" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
+
+<section>
+    <div class="container" style="background-color: lightcyan">
+        <div class="row">
+            <div class="col-sm-3" style="background-color: #5bc0de">
+                <div class="left-sidebar" >
+                    <div class="Categories_products" ><!--Categories_products-->
+                        <h2>Category</h2>
+                        <div class="brands-name" >
+                            <ul class="nav nav-pills nav-stacked">
+
+                                {{range .Categories}}
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" style="background-color: #4cae4c">
+                                            <h4 class="panel-title"><a href="/cat-wise-pro/{{.ID}}">
+                                                    {{.Name}}</a></h4>
+                                        </div>
+                                    </div>
+                                {{end}}
+                            </ul>
+                        </div>
+                    </div><!--/Categories_products-->
+
+                    <div class="brands_products"><!--brands_products-->
+                        <h2>Brands</h2>
+                        <div class="brands-name">
+                            <ul class="nav nav-pills nav-stacked">
+
+                                {{range .Brands}}
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" style="background-color: #4cae4c">
+                                            <h4 class="panel-title"><a href="/brand-wise-pro/{{.ID}}">
+                                                    {{.Name}}</a></h4>
+                                        </div>
+                                    </div>
+                                {{end}}
+                            </ul>
+                        </div>
+                    </div><!--/brands_products-->
+
+                    <div class="well text-center">
+                        <div class="slider slider-horizontal" style="width: 174px;"><div class="slider-track"><div class="slider-selection" style="left: 30%; width: 47.5%;"></div><div class="slider-handle round left-round" style="left: 30%;"></div><div class="slider-handle round" style="left: 77.5%;"></div></div><div class="tooltip top" style="top: -30px; left: 61.025px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">180 : 465</div></div><input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" style=""></div><br>
+                        <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+                    </div>
+                    <!--/price-range-->
+
+                    <div class="shipping text-center"><!--shipping-->
+                        <img src="/assets/Public/User/images/home/shipping.jpg" alt="" />
+                    </div><!--/shipping-->
+
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items"><!--features_items-->
+                    <h2 class="title text-center">Featured Items</h2>
+                    {{range .Products}}
+                    {{if (eq .Status 1)}}
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper" style="background-color: #5bc0de">
+
+                                <div class="single-products">
+                                    <div class="productinfo text-center" >
+                                        <a href="/product-details/{{.ID}}"><img src="/assets{{.ImgUrl.String}}" style='height:120px;width:120px' alt="" /></a>
+                                        <h2>{{.Price}} Tk</h2>
+                                        <p>{{.Name}}</p>
+                                        <form action="/add-cart" method='post'>
+                                            <input name='quantity' type='hidden' value='1' >
+                                            <input name='id' type='hidden' value={{.ID}}><br>
+                                            <input class="btn btn-default add-to-cart" type='submit' value='Add to Cart'>
+                                        </form>
+                                        {{/*<a href="/product-details/{{.ID}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>*/}}
+                                    </div>
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified" style="background-color: #4cae4c">
+                                        <li><a href="/add-to-wishlist/{{.ID}}"><i class="fa fa-plus-square" ></i>Add to wishlist</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div><!--features_items-->
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{{template "userFooter" .}}

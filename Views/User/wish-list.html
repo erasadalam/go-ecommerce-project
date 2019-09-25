@@ -1,0 +1,74 @@
+{{template "userHeader" .}}
+{{if (ne .Msg.Success "")}}
+    <br><br><span class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+{{else if (ne .Msg.Fail "")}}
+    <br><br><span class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+{{end}}
+<div class='container'>
+    <div class='col-sm-12'>
+        {{if (gt .Wish_items 0) }}
+        <div class="features_items"><!--features_items-->
+            <h2 class="title text-center">Wishlist Items</h2>
+            {{range .Wishlists }}
+                {{if (eq .Product.Status 1)}}
+                <div class="col-sm-4">
+                    <div class="product-image-wrapper" style="background-color: #5bc0de">
+
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <a href="/product-details/{{.Product.ID}}"><img src="/assets{{.Product.ImgUrl.String}}" style='height:150px;width:150px' alt="" /></a>
+                                <h2>{{.Product.Price}} Tk</h2>
+                                <p>{{.Product.Name}}</p>
+                                <form action="/add-cart-and-remove" method='post'>
+                                    <input name='quantity' type='hidden' value='1' >
+                                    <input name='id' type='hidden' value={{.Product.ID}}><br>
+                                    <input class="btn btn-default add-to-cart" type='submit' value='Add to Cart'>
+                                </form>
+                                <td class="cart_delete">
+                                    <a class="cart_quantity_delete" href="/delete-from-wishlist/{{.Product.ID}}"><i
+                                                class="fa fa-times"></i>Delete from Wishlist</a>
+                                </td>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                    {{end}}
+           {{end}}
+
+            {{else}}
+                <h1>No Product added into Wishlist. </h1>
+            {{end}}
+        </div><!--features_items-->
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+        <div class='container'>
+            <p></p>
+        </div>
+    </div>
+</div>
+
+{{template "userFooter" .}}

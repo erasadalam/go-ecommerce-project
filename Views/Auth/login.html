@@ -1,0 +1,45 @@
+{{template "userHeader" .}}
+
+<section id="form"><!--form-->
+
+    <div class="container">
+        <div class="row">
+            {{if (ne .Msg.Success "")}}
+                <br><br><span  class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+            {{else if (ne .Msg.Fail "")}}
+                <br><br><span  class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+            {{end}}
+            <div class="col-sm-4 col-sm-offset-1">
+
+                <div class="login-form"><!--login form-->
+
+                    <h2>Login to your account</h2>
+                    <form action="/login?q={{ .Request_url }}" method="post">
+                        <input type="email" placeholder="Email Address" name="email" />
+                        <input type="password" placeholder="Password" name="password" />
+
+                        <button type="submit" class="btn btn-default">Login</button>
+                    </form>
+                </div><!--/login form-->
+            </div>
+            <div class="col-sm-1">
+                <h2 class="or">OR</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="signup-form"><!--sign up form-->
+                    <h2>New User Signup!</h2>
+                    <form action="/register" method='post'>
+                        <input type="text" placeholder="FullName" required='' name='full_name'>
+                        <input type="email" placeholder="Email Address" required='' name='email'/>
+                        <input type="password" placeholder="Password" required='' name='password'/>
+                        <input type="password" placeholder="Confirm Password" required='' name='confirm-password'/>
+                        <input type="text" placeholder="Phone No" required='' name='phone' />
+                        <button type="submit" class="btn btn-default">Signup</button>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+</section><!--/form-->
+
+{{template "userFooter" .}}

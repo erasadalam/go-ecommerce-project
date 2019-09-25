@@ -1,0 +1,74 @@
+{{template "adminHeader" .}}
+			<!--start: Table-->
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header" data-original-title>
+			<h2><i class="halflings-icon user"></i><span class="break"></span>All Category List</h2>
+			<div class="box-icon">
+				<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+				<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+				<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<div class="" >
+			{{if (ne .Msg.Success "")}}
+				<br><br><span class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+			{{else if (ne .Msg.Fail "")}}
+				<br><br><span class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+			{{end}}
+			</div>
+			<table class="table table-striped table-bordered bootstrap-datatable datatable">
+				<thead style='background-color:lightskyblue'>
+				<tr>
+					<th>Category Id</th>
+					<th>Category Name</th>
+					<th>Category Description</th>
+					<th>Status</th>
+					<th>Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				{{range .Categories}}
+				<tr>
+					<td>{{.ID}}</td>
+					<td class="center">{{.Name}}</td>
+					<td class="center">{{.Description.String}}</td>
+					<td class="center">
+						{{if (eq .Status 1)}}
+						<span class="label label-success">Active</span>
+						{{else}}
+						<span class="label">Inactive</span>
+						{{end}}
+					</td>
+					<td class="center">
+
+						{{if (eq .Status 1)}}
+							<a class="btn" href="/make-category-inactive/{{.ID}}">
+								<span class="halflings-icon white thumbs-down"></span>
+							</a>
+
+						{{else if (eq .Status 0)}}
+							<a class="btn btn-success" href="/make-category-active/{{.ID}}">
+								<span class="halflings-icon white thumbs-up"></span>
+							</a>
+						{{end}}
+
+						<a class="btn btn-info" href="/edit-category/{{.ID}}">
+							<i class="halflings-icon white edit"></i>
+						</a>
+						<a class="btn btn-danger" href="/delete-category/{{.ID}}" id='delete'>
+							<i class="halflings-icon white trash"></i>
+						</a>
+					</td>
+				</tr>
+				{{end}}
+				</tbody>
+			</table>
+		</div>
+	</div><!--/span-->
+
+</div><!--/row-->
+			<!--end: Table-->
+
+{{template "adminFooter"}}

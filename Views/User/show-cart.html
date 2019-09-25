@@ -1,0 +1,112 @@
+{{template  "userHeader" .}}
+{{if (ne .Msg.Success "")}}
+    <br><br><span class="alert alert-success">{{ .Msg.Success }}</span><br><br>
+{{else if (ne .Msg.Fail "")}}
+    <br><br><span class="alert alert-danger">{{ .Msg.Fail }}</span><br><br>
+{{end}}
+<section id="cart_items">
+    <div class="container">
+
+        <div class="col-sm-12">
+            {{if .FinalCart.GrandTotal }}
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Image</td>
+                        <td class="description">Product Name</td>
+                        <td class="price">Unit Price</td>
+                        <td class="quantity">Quantity</td>
+                        <td class="quantity">Total</td>
+                        <td class="quantity">TotalTax({{.FinalCart.Tax}}% Per Product)</td>
+                        <td class="total">Total With Tax</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {{range .FinalCart.Carts}}
+                    <tr>
+                        <td class="cart_product">
+                            <img src="/assets{{.Product.ImgUrl.String}}" alt="" style='width:80px;height:80px'>
+                        </td>
+                        <td>
+                            <a href="/product-details/{{.Product.ID}}"><h4>{{.Product.Name}}</h4></a>
+                        </td>
+                        <td class="cart_price">
+                            <p>{{.Product.Price}} Tk</p>
+                        </td>
+                        <td class="cart_quantity">
+                            {{/*<form action="/update-cart" method="post">
+                                <input type="number" name="quantity" value='{{.Quantity}}' min="1" max="20" style="width:50px">
+                                <input type='hidden' value='{{.ID}}' name='id'>
+                                <input type='submit' class='btn btn-success' value='Update'>
+
+                            </form>*/}}
+                            <p>{{.Quantity}}</p>
+                        </td>
+                        <td class="cart_total">
+                            <p class="cart_total_price">{{.Total}} Tk</p>
+                        </td>
+                        <td class="cart_total_tax">
+                            <p class="cart_total_price">{{.TotalTax}} Tk</p>
+                        </td>
+                        <td class="cart_total_with_tax">
+                            <p class="cart_total_price">{{.TotalWithTax}} Tk</p>
+                        </td>
+                        <td class="cart_delete">
+                            <a class="cart_quantity_delete" href="/delete-from-cart/{{.Product.ID}}"><i
+                                        class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                    {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="col-sm-3">
+</div>
+<div class="col-sm-6">
+    <div class="total_area">
+        <ul>
+            <li>Sub Total <span>{{.FinalCart.SubTotal}} Tk</span></li>
+            <li>Total Tax <span>{{.FinalCart.GrandTotalTax}}</span></li>
+            <li>Shipping Cost <span>{{.FinalCart.ShippingCost}}</span></li>
+            <li>Grand Total <span>{{.FinalCart.GrandTotal}}</span></li>
+        </ul>
+        <a class="btn btn-default check_out" href="/checkout/{{.FinalCart.GrandTotal}}">Check Out</a>
+    </div>
+    {{else}}
+        <h1>No Product added into Cart.</h1>
+    {{end}}
+</div>
+<div class='container'>
+    <p></p>
+</div>
+<div class='container'>
+    <p></p>
+</div>
+    <p></p>
+</div>
+<div class='container'>
+    <p></p>
+</div>
+<div class='container'>
+    <p></p>
+</div>
+<div class='container'>
+    <p></p>
+</div>
+<div class='container'>
+    <p></p>
+</div>
+<div class='container'>
+    <p></p>
+</div>
+<div class='container'>
+    <p></p>
+</div>
+
+{{template "userFooter" .}}
